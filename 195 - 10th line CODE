@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    ofstream outFile("example.txt");
+
+    if (!outFile) {
+        cerr << "Error opening file for writing!" << endl;
+        return 1;
+    }
+
+    for (int i = 1; i < 11; i++) {
+        outFile << "line " << i << endl;
+    }
+    outFile.close();
+
+    ifstream inFile("example.txt");
+
+    if (!inFile) {
+        cerr << "Error opening file for reading!" << endl;
+        return 1;
+    }
+
+    string line;
+    int lineNumber = 1;
+    while (getline(inFile, line)) {
+        if (lineNumber == 10) {
+            cout << line << endl;
+            break;
+        }
+        lineNumber++;
+    }
+
+    inFile.close();
+    return 0;
+}
